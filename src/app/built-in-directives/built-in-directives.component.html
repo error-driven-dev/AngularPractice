@@ -1,0 +1,56 @@
+
+<!-- toggling value of onlyOdd property between true and false -->
+<button class="btn btn-primary" (click)="onlyOdd = !onlyOdd">Toggle odd and even</button>
+
+
+<!-- ======================================================= -->
+<!-- BUILTIN STRUCTURAL DIRECTIVES *ngFor *ngIf -- WHICH ADD/REMOVE ELEMENTS FROM DOM -->
+<!-- BUILT IN ATTRIBUTE DIRECTIVES [ngClass] [ngStyle] -- WHICH MANIPULATE/MODIFY THE DOM -->
+<div class="row">
+  <ul class="list-group">
+    <div *ngIf="!onlyOdd">
+      
+    <li class="list-group-item" *ngFor="let number of odd">
+      {{number}}
+
+    </li>
+  </div>
+
+    <div *ngIf="onlyOdd">
+    <li class="list-group-item" *ngFor="let number of even">
+      {{number}}
+
+    </li>
+  </div>
+  </ul>
+</div>
+
+
+<!-- ======================================================= -->
+
+<!-- BUILT IN ATTRIBUTE DIRECTIVES [ngClass] [ngStyle] -- WHICH MANIPULATE/MODIFY THE DOM -->
+<!-- EXAMPLE SHOWS ADDING CLASS OR STYLE ONLY IF A CONDITION IS TRUE -->
+<div class="row">
+  <ul class="list-group">
+    <div *ngIf="!onlyOdd">
+    <li class="list-group-item" *ngFor="let number of numbers"
+    [ngClass]="{odd: number % 2 !== 0}"
+    [ngStyle]="{backgroundColor: number % 2 === 0 ? 'pink' : 'transparent'}">
+    
+      {{number}}
+
+    </li>
+</div>
+  </ul>
+</div>
+
+<!-- CUSTOM DIRECTIVE USED BELOW TO SET BACKGROUND GREEN -->
+<p appCustomDirective>Using the 'custom directive'</p>
+<p appBetterDirective>Using the 'better directive'</p>
+<p appEventDrivenDirective>Using the mouseover and mouseleave events</p>
+<p appHostBindingDirective>@HostBinding sets text initially to blue, then @HostListener turns red when clicked</p>
+
+<p appDynamicBindingDirective >mouse over to see default and alt color set in directive</p>
+
+CAN USE BINDING WITH BRAKETS AND "''" AS IN ALTCOLOR -- OR REMOVE BRACKETS AND ONE SET OF QUOTES AS IN DEFAULTCOLOR
+<p appDynamicBindingDirective defaultColor = 'green' [altColor]= "'blue'">mouse over to see default and alt color set by data binding from HTML elem</p>

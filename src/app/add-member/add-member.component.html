@@ -1,0 +1,16 @@
+
+<h1>Add New Member</h1>
+
+
+  
+    <label for="name">Name:</label>
+    <!-- binds the input with a property in the class -->
+    <input type="text" id="name" [(ngModel)] = "newTeamMember" >
+    
+    <label for="level">Level:</label>
+    <input type="text" id="level" [(ngModel)] ="newLevel">
+
+    <button type="button" 
+    (click)="onAddMember()">Add </button>
+
+
