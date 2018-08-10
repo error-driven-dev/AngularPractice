@@ -1,4 +1,4 @@
-
+<h3>BUILT IN DIRECTIVES *ngIF *ngFor [ngClass] [ngStyle] to manipulate the DOM</h3>
 <!-- toggling value of onlyOdd property between true and false -->
 <button class="btn btn-primary" (click)="onlyOdd = !onlyOdd">Toggle odd and even</button>
 
@@ -43,14 +43,51 @@
 </div>
   </ul>
 </div>
-
+<hr>
+<h2>
+  CUSTOM DIRECTIVES
+</h2>
 <!-- CUSTOM DIRECTIVE USED BELOW TO SET BACKGROUND GREEN -->
 <p appCustomDirective>Using the 'custom directive'</p>
 <p appBetterDirective>Using the 'better directive'</p>
+<hr>
+<h2>
+  EVENT DRIVEN DIRECTIVES
+</h2>
+
 <p appEventDrivenDirective>Using the mouseover and mouseleave events</p>
 <p appHostBindingDirective>@HostBinding sets text initially to blue, then @HostListener turns red when clicked</p>
+<hr>
+<h2>
+  DYNAMIC BINDING TO DIRECTIVES
+</h2>
 
 <p appDynamicBindingDirective >mouse over to see default and alt color set in directive</p>
 
-CAN USE BINDING WITH BRAKETS AND "''" AS IN ALTCOLOR -- OR REMOVE BRACKETS AND ONE SET OF QUOTES AS IN DEFAULTCOLOR
+
+<!-- CAN USE BINDING WITH BRAKETS AND "''" AS IN ALTCOLOR -- OR REMOVE BRACKETS AND ONE SET OF QUOTES AS IN DEFAULTCOLOR -->
 <p appDynamicBindingDirective defaultColor = 'green' [altColor]= "'blue'">mouse over to see default and alt color set by data binding from HTML elem</p>
+
+<hr>
+<h2>
+  STRUCTURAL DIRECTIVES <P></P>
+</h2>
+<button class="btn btn-primary" (click)="value = !value">Structural Directive Toggle: {{value}}</button>
+<p *appStructural="value">Element added to DOM when Value is false</p>
+
+<hr>
+<h3>SWITCH STATEMENT</h3>
+<p>please select your age group</p>
+<button (click)= "switchValue= 'child'">Under 14</button>
+<button (click)= "switchValue= 'youngAdult'">14-20</button>
+<button (click)= "switchValue= 'adult'">over 21</button>
+<button (click)= "switchValue= 'senior'">over 65</button>
+ <h3>Admission type:</h3>
+<div [ngSwitch]="switchValue">
+  <p *ngSwitchCase="'child'">Child discount</p>
+  <p *ngSwitchCase="'youngAdult'">Adult admission -- under 21</p>
+  <p *ngSwitchCase="'adult'">Adult admission -- over 21 wristband</p>
+  <p *ngSwitchCase="'senior'">Senior discount</p>
+
+
+</div>

@@ -1,3 +1,14 @@
+==========================================
+LOCAL REFERENCES
+==========================================
+#<referencename>: can be put on any html element and references the entire element
+ *can he used anywhere else in the template without '#'
+ *use with @ViewChild('refName') in front of property with type ElementRef;
+        use element name .nativeElement.value to dig out value.
+
+
+
+
 BUILDING DIRECTIVES -- SEE BUILTIN DIRECTIVES COMPONENT FOR EXAMPLES
 -attribute directives -- modify the DOM
 -structural directives -- add/remove elements from DOM
@@ -63,3 +74,21 @@ scroll
 select
 unload
 wheel
+
+STRUCTURAL DIRECTIVES: ADD/REMOVE DOM ELEMENTS
+        *uses ViewContainerRef and TemplateRef (the reference to <ng-template>)
+        *create a setter property and decorate with @Input() and inside method use a VCRef method and pass in the Template ref object.
+        *struct dirctives live in <ng-template>; shorthand is using '*' before the dir name.
+
+        SX: @Input set appSelectorName(condition: bool) {
+                if(condition) {
+                        this.vcRef.CreateEmbeddedView(this.templateRef)
+                }
+        }
+        ctor(private template: TemplateRef<any>, private ViewContainerRef)
+
+
+===================================================
+SERVICES and DEPENDENCY INJECTOR
+====================================================
+Service 

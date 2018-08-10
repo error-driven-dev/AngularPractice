@@ -10,8 +10,8 @@ export class BuiltInDirectivesComponent implements OnInit {
  odd = [1, 3, 5];
  even = [ 2,  4];
  onlyOdd = false;
-
- 
+value = true;
+ switchValue = '';
   constructor() { }
 
   ngOnInit() {

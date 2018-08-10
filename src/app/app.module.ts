@@ -13,6 +13,8 @@ import { BetterDirectiveDirective } from './directives/better-directive.directiv
 import { EventDrivenDirectiveDirective } from './directives/event-driven-directive.directive';
 import { HostBindingDirectiveDirective } from './directives/host-binding-directive.directive';
 import { DynamicBindingDirectiveDirective } from './directives/dynamic-binding-directive.directive';
+import { StructuralDirective } from './directives/structural.directive';
+import { ServicesDemoComponent } from './services-demo/services-demo.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { DynamicBindingDirectiveDirective } from './directives/dynamic-binding-d
     BetterDirectiveDirective,
     EventDrivenDirectiveDirective,
     HostBindingDirectiveDirective,
-    DynamicBindingDirectiveDirective
+    DynamicBindingDirectiveDirective,
+    StructuralDirective,
+    ServicesDemoComponent
   ],
   imports: [
     BrowserModule,
