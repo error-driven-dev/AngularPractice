@@ -1,5 +1,5 @@
 import { Directive, HostBinding, Input, HostListener } from '@angular/core';
-import { MockNgModuleResolver } from '../../../node_modules/@angular/compiler/testing';
+import { MockNgModuleResolver } from '@angular/compiler/testing';
 
 @Directive({
   selector: '[appDynamicBindingDirective]'

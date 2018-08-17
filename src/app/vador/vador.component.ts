@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { createWiresService } from '../../../node_modules/@types/selenium-webdriver/firefox';
+import { createWiresService } from 'selenium-webdriver/firefox';
 
 @Component({
   selector: 'app-vador',

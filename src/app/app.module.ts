@@ -15,6 +15,11 @@ import { HostBindingDirectiveDirective } from './directives/host-binding-directi
 import { DynamicBindingDirectiveDirective } from './directives/dynamic-binding-directive.directive';
 import { StructuralDirective } from './directives/structural.directive';
 import { ServicesDemoComponent } from './services-demo/services-demo.component';
+import { ServiceProducerComponent } from './services-demo/service-producer/service-producer.component';
+import { ServiceConsumerComponent } from './services-demo/service-consumer/service-consumer.component';
+import { ObservablesComponent } from './observables/observables.component';
+import { AppRoutingModule } from './app-routing.module';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -30,11 +35,16 @@ import { ServicesDemoComponent } from './services-demo/services-demo.component';
     HostBindingDirectiveDirective,
     DynamicBindingDirectiveDirective,
     StructuralDirective,
-    ServicesDemoComponent
+    ServicesDemoComponent,
+    ServiceProducerComponent,
+    ServiceConsumerComponent,
+    ObservablesComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

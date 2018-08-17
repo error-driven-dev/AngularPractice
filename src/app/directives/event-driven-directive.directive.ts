@@ -12,6 +12,7 @@ export class EventDrivenDirectiveDirective {
   }
   @HostListener('mouseleave') mouseaway(eventData: Event) {
      this.renderer.setStyle(this.elementRef.nativeElement, 'backgroundColor', 'transparent');
+     
    }
 
 }

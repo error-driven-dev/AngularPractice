@@ -8,15 +8,11 @@ import { LoggingService } from './services/log.service';
   providers: [LoggingService]
 })
 export class ServicesDemoComponent implements OnInit {
-  msg: string;
-  constructor(private logger: LoggingService) { }
+  msg: string; constructor(private logger: LoggingService) { }
 
   ngOnInit() {
     
   }
 
-  onSendMessage() {
-    this.logger.messageLogger(this.msg);
-    this.msg = '';
-  }
+
 }

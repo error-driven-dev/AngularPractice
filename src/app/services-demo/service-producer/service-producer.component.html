@@ -1,0 +1,7 @@
+<p>
+  service-producer works!
+</p>
+<h3>adding a message will use loggerservice to log to console</h3>
+<h3></h3>
+<input type="text" [(ngModel)]="msg" name="message" (onSendMessage)="msg=''">
+<button class="btn btn-default" (click)="onSendMessage()">Send Message</button>
