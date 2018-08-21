@@ -20,6 +20,7 @@ import { ServiceConsumerComponent } from './services-demo/service-consumer/servi
 import { ObservablesComponent } from './observables/observables.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HeaderComponent } from './header/header.component';
+import { FormsComponent } from './forms/forms.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { HeaderComponent } from './header/header.component';
     ServiceProducerComponent,
     ServiceConsumerComponent,
     ObservablesComponent,
-    HeaderComponent
+    HeaderComponent,
+    FormsComponent
   ],
   imports: [
     BrowserModule,

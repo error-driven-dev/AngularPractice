@@ -1,3 +1,13 @@
+D: directive
+I: interface; import and implement in class def
+S: service; register as 'provider', import into class, pass in ctor as private property
+H: Html
+SX: Syntax
+N: scoped note
+*: general note
+O: object/datatype; import from module for access  
+
+
 ==========================================
 LOCAL REFERENCES
 ==========================================
@@ -109,14 +119,7 @@ LISTEN AND SUBSCRIBE TO SERVICES:
         In Consumer Component: inject service then use to call .subscribe method and pass in lambda .subscribe((datareceived => this.property = datareceived));
         
 
-D: directive
-I: interface; import and implement in class def
-S: service; register as 'provider', import into class, pass in ctor as private property
-H: Html
-SX: Syntax
-N: scoped note
-*: general note
-O: object/datatype; import from module for access    
+  
 
 BUILDING DIRECTIVES
 -attribute directives -- modify the DOM
@@ -228,3 +231,82 @@ O: Subscription (from rxjs) : type that allows observable methods
         service.property.next(data);
     and in consumer comp:
         service.property.subscribe( data => {code to process});
+
+======================================
+FORMS 
+======================================
++++++++++++++++++++++++++++++++++++++++
+TEMPLATE APPROACH
+
+-------------------------------------------------
+    QUICKSTART:
+    import > FormsModule
+    register input controls > ngModel name="<name>"
+    form tag > (ngSubmit)="onSubmit(formRef)" #formRef="ngForm"
+    comp.ts > onSubmit(formRef: NgForm) {
+        access/process form inputs code block
+    }
+
+    ALT:*remove ngSubmit listener/onSubmit method -- use propertyName below to access the NgForm object
+    comp.ts > @ViewChild('formRef') <propertyName>: NgForm
+    
+--------------------------------------------------
+M: FormsModule (@angular/forms) and add in app.module imports array
+D: ngModel: register input controls by adding directive and name=""; angular recognizs as control and adds properties/css classes that reflect STATE. Angular adds css classes to reflect STATE and ng-reflect-model directive to tag.
+O: NgForm: object created by angular containing the STATE of the form including input values (NgForm.value) property values (eg dirty, touched, valid, disabled)
+    SX: #formRef="ngForm" (ngSubmit)="onSubmit(formRef)" 
+        *add to form tag; the listener will work with form's submit button.
+        *SUBMIT: ref to NgForm object is passed to method in component class and used to query property values.
+            SX: onSubmit(formRef: NgForm){
+            formRef.value.name;
+            }
+    NgForm PROPERTIES TO CSS: ng properties that are TRUE are added as css classes in html tags and can be used to add STATE specific styling
+        SX: ng-pristine/ng-dirty  --> has something been entered
+            ng-touched/ng-untouched  --> has cursor moved into then out of field
+            ng-valid/ng-invalid --> are entries valid
+        EX: in CSS file:
+            input.ng-invalid.ng-touched{ border: red solid 1px} 
+    SET NgForm PROPERTIES DYNAMICALLY: (see button tag)
+        EX: [disabled]="formRef.invalid"
+
+VALIDATION: add VALIDATOR directives to html tags to check for valid/invalid state       SX: required email 
+        minlength/maxlength = "number"  --> (see password input tag)
+        pattern="[a-zA-Z ]*"
+        requiredtrue  -->used for checkboxes
+    *SHOW FLASH MSGS: (at control level) add #localRef="ngModel" to the control tag,add a message wrapped in span tag with structural directive to show message when desired properties are true/false  (EX: see password input)
+    SX: *ngIf="localRef.invalid && localRef.touched" 
+      
+
+DEFAULT VALUES:  [ngModel]="defaultValueProperty" (one-way property binding)
+    *use one-way binding to display default value originating from class property
+    *SELECT TAGS: can use the class property set to the value of one of the options
+        (EX: see select tag in form component)
+
+GROUPING TAGS: 
+D: ngModelGroup='<groupName>' add to div/container tag to group and next all tags inside;
+    *To reference the group also add #localRef="ngModelGroup" and gain access to ngModelGroup object
+
+SETTING/PATCHING FORM VALUES INTO A FORM:
+    *SET: sets ALL values; use a localRef and @ViewChild('localRef) <property>: NgForm to access NgForm object, THEN use  <property>.setValue({JS object of key value pairs to set})
+    *PATCH: sets only specified values; same @ViewChild() access as above, then use <property>.form.patchValue({JS obbject of key: value pairs to set})
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+REACTIVE APPROACH
+
+M: ReactiveFormsModule(@angular/forms), add in imports in app.module
+O: FormGroup -- object that holds all form controls; declare a field of this type then init a new FormGroup in ngOnInit()
+O: FormControl -- each control in a form group; pass into FormGroup Ctor as the value of key:value pairs
+    SX: this.<formname>= new FormGroup({
+        'username': new FormControl(defaultValue, [Validator.property,...]),
+        '<controlname>': new FormControl(null)
+    })
+D: [formGroup]="<formname>" --> add to form tag to bind to FormGroup object declared in component.ts
+    *next a form group into another by giving it a name; build a container in html to mimic grouping and add D: formGroupName="<nestedGroupName>", THEN in parsing object properties use
+    <nestedGroupName.controlname> to refer to control.
+D: formControlName="<controlname> --> add to each tag to bind to FormComponent in FormGroup object declared in component.ts
+M: (ngSubmit)="onSubmit()" --> add to form tag to tie in submit button; then create onSubmit method in component.ts
+
+VALIDATION: 
+O: Validator --> add as 2nd argument in FormControl initialization
+*FLASH MESSAGE: add a span and add use FormControl object with .get method to get the state of desired properties
+    SX: *ngIf="<formName>.get('<controlname>').invalid && <formName>.get(<controlname>).touched"

@@ -1,0 +1,43 @@
+<div class="container">
+      <div class="row">
+          <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+              
+            <form #formRef="ngForm" (ngSubmit)="onSubmit(formRef)">
+                <div class="form-group">
+                  <label for="username">username</label>
+                  <input  ngModel required  name="username" class="form-control" type="text" id="username">
+                  
+                  <label for="email">email</label>
+                  <input ngModel required email name="email" class="form-control" type="text" id="email">
+                  
+                  <label for="password">password</label>
+                  <input ngModel #pwRef="ngModel" required minlength="8" name="password" class="form-control" type="password" id="password">
+                  <span class="text-danger" *ngIf="pwRef.invalid && pwRef.touched">Password must be at least 8 characters</span>
+                </div>
+                <div class="form-group">
+                  
+                  <label for="securityQ">security questions</label>
+                  <select [ngModel]="defaultQuestion" #selectRef="ngModel" ngModel name="securityQ" class="form-control"  id="securityQ">
+                    <option value="choose">Select a Question</option>
+                    <option value="pet">Name of first pet?</option>
+                    <option value="mother">Mother's maiden name?</option>
+                  </select><span class="text-danger" *ngIf="selectRef.touched && selectRef.value=='choose'">Please select a question</span>
+                </div>
+                  
+                  <label for="securityA">answer:</label>
+                  <input [disabled]="selectRef.value == 'choose'" required ngModel #answerRef="ngModel" name="securityA" class="form-control" type="text" id="securityA" name="securityA">
+                  <span class="text-danger help-block" *ngIf="selectRef.value == 'choose' && answerRef.touched">Select a security question above and type in your answer</span>
+
+                  <div class="form-group row">
+                    <span class="col-md-2" *ngFor="let option of radioOptions">
+                        <input  ngModel value={{option}} type="radio" name="gender" id="{{option}}" required > {{option}}
+                      
+                    </span>
+                  </div>
+                <hr>
+              
+                <button  [disabled]="formRef.invalid" class="btn btn-primary" type="submit">submit</button>
+              </form>
+        </div>
+    </div>
+</div>

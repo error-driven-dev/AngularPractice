@@ -1,0 +1,7 @@
+input.ng-invalid.ng-touched {
+    border: red solid 2px;
+}
+input[type=radio] {
+    margin-right: 5px;
+}
+
