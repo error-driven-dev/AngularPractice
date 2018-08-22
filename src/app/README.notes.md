@@ -293,20 +293,44 @@ SETTING/PATCHING FORM VALUES INTO A FORM:
 +++++++++++++++++++++++++++++++++++++++++++++++++++++
 REACTIVE APPROACH
 
+app.Module -->import ReactiveFormsModule and add to imports
+app.component --> declare property of type FormGroup
+app.component>onInit() --> create schemea by init a new FormGroup object and adding property:new FormControl() pairs
+HTML FORM tag --> add [formGroup]="formName" and (ngSubmit)="onSubmit()"; add a button of type submit
+
+
+*by creating the schema object, don't need to pass refs to elements
 M: ReactiveFormsModule(@angular/forms), add in imports in app.module
-O: FormGroup -- object that holds all form controls; declare a field of this type then init a new FormGroup in ngOnInit()
-O: FormControl -- each control in a form group; pass into FormGroup Ctor as the value of key:value pairs
+O: FormGroup -- object that holds all form controls; declare a field of this type then init a new FormGroup in ngOnInit(); 
+    *.get('property or path'): use FormGroup name with .get() to access form values and properties
+D: [formGroup]="<formname>" --> add to form tag to bind to FormGroup object declared in component.ts
+    *NESTING FORM GROUPS: nest the new FormGroup object in the component object schema; then in html build a container div to hold the crontrols and add formGroup directive 
+        D: formGroupName="<nestedGroupName>", THEN in parsing object properties use
+        <nestedGroupName.controlname> to refer to control.
+
+O: FormControl -- each control in a form group; pass into FormGroup Ctor as key:value pairs( key: is the propery name that binds to formControlName directive in HTML and value: is a new FormControl object)
     SX: this.<formname>= new FormGroup({
         'username': new FormControl(defaultValue, [Validator.property,...]),
         '<controlname>': new FormControl(null)
     })
-D: [formGroup]="<formname>" --> add to form tag to bind to FormGroup object declared in component.ts
-    *next a form group into another by giving it a name; build a container in html to mimic grouping and add D: formGroupName="<nestedGroupName>", THEN in parsing object properties use
-    <nestedGroupName.controlname> to refer to control.
 D: formControlName="<controlname> --> add to each tag to bind to FormComponent in FormGroup object declared in component.ts
+
+O: FormArray([]) --> binds formControls to an array; holds a collection of form controls's data
+    SX: 'addresses' : new FormArray([new FormControl()])
+    *ACCESS: must cast .get() method to access or modify array; put parens around cast object then appent .push method
+    SX: (<FormArray>this.<formName>.get('<arrayName>')).push(new FormControl(null, Validators))
+
+D: formArrayName="<arrayName>": add to html container(div) holding formcontrols
+DYNAMMICALLY ADDING FORM CONTROLS TO FormArray:
+    *button should be of type button so that it does not submit the form and have click listener
+    *clicking the button just adds the control to the array that HAS a value to the array.
+
+
 M: (ngSubmit)="onSubmit()" --> add to form tag to tie in submit button; then create onSubmit method in component.ts
 
 VALIDATION: 
 O: Validator --> add as 2nd argument in FormControl initialization
 *FLASH MESSAGE: add a span and add use FormControl object with .get method to get the state of desired properties
     SX: *ngIf="<formName>.get('<controlname>').invalid && <formName>.get(<controlname>).touched"
+
+

@@ -1,0 +1,53 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+            
+          <form [formGroup]="registration" (ngSubmit)="onSubmit()">
+              <div class="form-group">
+                <label for="username">username</label>
+                <input   formControlName="username" class="form-control" type="text" id="username">
+                
+                <label for="email">email</label>
+                <input formControlName="email" class="form-control" type="text" id="email">
+                
+                <label for="password">password</label>
+                <input  required minlength="8" formControlName="password" class="form-control" type="password" id="password">
+                <span class="text-danger" *ngIf="registration.get('password').invalid && registration.get('password').touched">Password must be at least 8 characters</span>
+              </div>
+              <div class="form-group">
+                
+                <label for="securityQ">security questions</label>
+                <select  formControlName="securityQ" class="form-control"  id="securityQ">
+                  <option value="choose">Select a Question</option>
+                  <option value="pet">Name of first pet?</option>
+                  <option value="mother">Mother's maiden name?</option>
+                </select><span class="text-danger" *ngIf="registration.get('securityQ').value == 'choose' && registration.get('securityQ').touched">Please select a question</span>
+              </div>
+                
+                <div *ngIf="registration.get('securityQ').value != 'choose'"><label for="securityA">answer:</label>
+                <input   formControlName="securityA" class="form-control" type="text" id="securityA" ></div>
+                <div class="form-group row">
+                    <span class="col-md-2" *ngFor="let option of radioOptions">
+                        <input   value={{option}} type="radio" formControlName="gender" id="{{option}}" required > {{option}}
+                      
+                    </span>
+                  </div>
+
+              <hr>
+            
+
+              <div class="form-group"formArrayName="references">
+                <h3>References</h3>
+                <button class="btn btn-default" type="button" (click)="onAddRef()">Add Reference</button>
+
+                <div *ngFor="let ref of registration.get('references').controls; let i = index;" class="form-group" >
+                  <input class="form-control" [formControlName]="i" type="text" >
+                </div>
+
+              </div>
+              <button [disabled]="registration.invalid" class="btn btn-primary" type="submit">submit</button>
+
+            </form>
+      </div>
+  </div>
+</div>

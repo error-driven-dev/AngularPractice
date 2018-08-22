@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { TeamListComponent } from './team-list/team-list.component';
@@ -21,6 +21,7 @@ import { ObservablesComponent } from './observables/observables.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HeaderComponent } from './header/header.component';
 import { FormsComponent } from './forms/forms.component';
+import { ReactiveComponent } from './forms/reactive/reactive.component';
 
 @NgModule({
   declarations: [
@@ -41,12 +42,14 @@ import { FormsComponent } from './forms/forms.component';
     ServiceConsumerComponent,
     ObservablesComponent,
     HeaderComponent,
-    FormsComponent
+    FormsComponent,
+    ReactiveComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
